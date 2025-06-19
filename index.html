@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendation System</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #34495e;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #232f3a;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+main {
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+    box-sizing: border-box;
+}
+
+#input-section {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#input-section label {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+#input-section input[type="text"] {
+    padding: 10px;
+    border: 2px solid #232f3a;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 1.1em;
+    color: #fff;
+    background-color: #232f3a;
+}
+
+#input-section button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+}
+
+#input-section button:hover {
+    background-color: #c0392b;
+}
+
+#recommendation-section {
+    margin-top: 30px;
+}
+
+#book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+.book-item {
+    border: 1px solid #232f3a;
+    border-radius: 15px;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    background-color: #2c3e50;
+}
+
+.book-item:hover {
+    transform: translateY(-5px);
+}
+
+.book-item img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.book-item h3 {
+    font-size: 1.3em;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.book-item p {
+    font-size: 1.1em;
+    color: #ddd;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #2c3e50;
+    color: #fff;
+    border-top: 2px solid #ddd;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: auto;
+}
+
+#about-us {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #2c3e50;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#about-us h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+#about-us p {
+    font-size: 1.1em;
+    color: #ddd;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    main {
+        width: 95%;
+        padding: 10px;
+    }
+
+    #input-section {
+        margin-bottom: 15px;
+    }
+
+    #input-section label {
+        font-size: 1em;
+    }
+
+    #input-section input[type="text"] {
+        padding: 8px;
+        font-size: 1em;
+    }
+
+    #input-section button {
+        padding: 10px 15px;
+        font-size: 1em;
+    }
+
+    #book-list {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 10px;
+    }
+
+    .book-item {
+        padding: 5px;
+    }
+
+    .book-item h3 {
+        font-size: 1.1em;
+    }
+
+    .book-item p {
+        font-size: 0.9em;
+    }
+
+    #about-us {
+        padding: 15px;
+    }
+
+    #about-us h2 {
+        font-size: 1.3em;
+    }
+
+    #about-us p {
+        font-size: 1em;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Book Recommendation System</h1>
+    </header>
+    <main>
+        <section id="input-section">
+            <label for="genre">Enter Your Favorite Genre:</label>
+            <input type="text" id="genre" name="genre">
+            <button id="get-recommendations">Get Recommendations</button>
+        </section>
+        <section id="recommendation-section">
+            <h2>Recommended Books</h2>
+            <div id="book-list">
+                <!-- Books will be dynamically added here -->
+            </div>
+        </section>
+        <section id="about-us">
+            <h2>About Us</h2>
+            <p>This is a book recommendation system designed to help you find books you'll love.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Book Recommendation System</p>
+    </footer>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const genreInput = document.getElementById('genre');
+    const getRecommendationsButton = document.getElementById('get-recommendations');
+    const bookList = document.getElementById('book-list');
+
+    getRecommendationsButton.addEventListener('click', function() {
+        const genre = genreInput.value;
+        if (genre) {
+            getBookRecommendations(genre);
+        } else {
+            alert('Please enter a genre.');
+        }
+    });
+
+    async function getBookRecommendations(genre) {
+        const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&maxResults=40`;
+
+        try {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+
+            if (data.items) {
+                displayBooks(data.items);
+            } else {
+                bookList.innerHTML = '<p>No recommendations found.</p>';
+            }
+        } catch (error) {
+            console.error('API error:', error);
+            bookList.innerHTML = '<p>An API error occurred.</p>';
+        }
+    }
+
+    function displayBooks(books) {
+        bookList.innerHTML = '';
+        books.forEach(book => {
+            const bookItem = document.createElement('div');
+            bookItem.classList.add('book-item');
+
+            const title = book.volumeInfo.title;
+            const authors = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown';
+            const description = book.volumeInfo.description ? book.volumeInfo.description.substring(0, 200) + '...' : 'No description';
+            const imageLink = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'resim_yok.png';
+
+            bookItem.innerHTML = `
+                <img src="${imageLink}" alt="${title}">
+                <h3>${title}</h3>
+                <p>Writer : ${authors}</p>
+                <p>${description}</p>
+            `;
+            bookList.appendChild(bookItem);
+        });
+    }
+});
+    </script>
+</body>
+</html>
