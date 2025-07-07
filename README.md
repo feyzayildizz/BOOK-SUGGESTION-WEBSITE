@@ -25,25 +25,6 @@ You can view the live website version of this project here:
 
 ---
 
-## 🚀 Getting Started
-
-### 1. Clone or Download
-
-```bash
-git clone https://github.com/yourusername/book-recommendation-system.git
-```
-
-Or simply download the `.zip` and extract it.
-
-### 2. Open in Browser
-
-Open the `index.html` file in your preferred browser:
-
-```bash
-open index.html
-```
-
----
 
 ## 📁 Project Structure
 
@@ -94,4 +75,5 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## 👨‍🎓 Author
 
-Developed by **[FEYZA YILDIZ, SEVDE ELMAS, DİLANUR ÖZCAN, ZEYNEP BAŞBAZ, ELİF ŞENTÜRK]** – feel free to connect!
+Developed by FEYZA YILDIZ, SEVDE ELMAS, DİLANUR ÖZCAN, ZEYNEP BAŞBAZ, ELİF ŞENTÜRK
+– feel free to connect!
